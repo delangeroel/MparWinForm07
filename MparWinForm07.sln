@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MparWinForm07", "MparWinForm07.csproj", "{C9E19D11-D860-446A-9815-E2ED52869536}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9E19D11-D860-446A-9815-E2ED52869536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9E19D11-D860-446A-9815-E2ED52869536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9E19D11-D860-446A-9815-E2ED52869536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9E19D11-D860-446A-9815-E2ED52869536}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56932AC6-3C9D-4566-8BD8-C5871AD87314}
+	EndGlobalSection
+EndGlobal
