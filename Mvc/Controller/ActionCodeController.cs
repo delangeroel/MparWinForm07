@@ -41,14 +41,28 @@ namespace MparWinForm07.Mvc.Controller
             this._view.CanModifyID = true;
         }
 
-        public void LoadView()
+        public void LoadView() {
+
+            getAllSinglePage(0, 10);
+        }
+        public void LoadView(int offset, int showrecords)
         {
-            _view.ClearGrid();
-            foreach (ActionCode actioncode in _actioncodesList)
-                _view.AddToGrid(actioncode);
+            _view.ClearGrid();  
+            foreach (ActionCode actioncode in actionCodeService.getAllPaging(offset, showrecords))
+                _view.AddToGrid(  actioncode );
 
             if (_actioncodesList.Count>0)
             _view.SetSelectedInGrid((ActionCode)_actioncodesList[0]);
+        }
+
+        public void getAllSinglePage(int offset, int showrecords)
+        {
+            _view.ClearGrid();
+            foreach (ActionCode actioncode in actionCodeService.getAllPaging(offset, showrecords))
+                _view.AddToGrid(actioncode);
+
+            if (_actioncodesList.Count > 0)
+                _view.SetSelectedInGrid((ActionCode)_actioncodesList[0]);
         }
 
         public void Remove()
@@ -173,11 +187,13 @@ namespace MparWinForm07.Mvc.Controller
         }
         public void getAllPaging(int startPage, int showrecords)
         {
-            int startPage = 0;
-            int showrecords = 0;
-            ActionCodeService actionCodeService = new ActionCodeService();
-            actionCodeService.getAllPaging(int startPage, int showrecords)
 
+            //actionCodeService.getAllPaging(startPage, showrecords);
+
+        }
+        public void create500()
+        {
+            actionCodeService.create500();
         }
     }
 }

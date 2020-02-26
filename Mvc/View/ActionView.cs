@@ -22,8 +22,9 @@ namespace MparWinForm07.Mvc.View
         ActionCodeController _controller;
 
         // Paging
-        private int CurrentPage =1;
-        private int RecordsPerPage;
+        private int CurrentPage = 0;
+        private int RecordsPerPage = 10;
+        private int offset;
         private int TableRecords;
         private int MaxPage;
 
@@ -148,32 +149,60 @@ namespace MparWinForm07.Mvc.View
 
         private void FirstButton_Click(object sender, EventArgs e)
         {
-            CurrentPage = 1;
+            refreshPagingInfo();
+            CurrentPage = 0;
+            offset = 0;
+            _controller.getAllSinglePage(CurrentPage, RecordsPerPage);
         }
 
         private void PreviousButton_Click(object sender, EventArgs e)
         {
-            CurrentPage--;
-            if (CurrentPage < 1) CurrentPage = 1;
+
+            refreshPagingInfo();
+            if (offset < RecordsPerPage) offset = 0;
+            else offset = offset - RecordsPerPage;
+            _controller.getAllSinglePage(offset, RecordsPerPage);
         }
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            CurrentPage++;
-            if (CurrentPage > MaxPage) CurrentPage = MaxPage;
+            refreshPagingInfo();
+            if (offset < TableRecords- RecordsPerPage) offset = offset + RecordsPerPage;
+            else                       offset  = (TableRecords % RecordsPerPage)* RecordsPerPage;
+            _controller.getAllSinglePage(offset, RecordsPerPage);
+
         }
 
         private void LastButton_Click(object sender, EventArgs e)
         {
-            CurrentPage = getMaxPage();
+            // _controller.create500();
+            refreshPagingInfo();
+            offset = (MaxPage % RecordsPerPage) * RecordsPerPage;
+            _controller.getAllSinglePage(offset, RecordsPerPage);
         }
 
-        private int getMaxPage()
+        private void refreshPagingInfo()
         {
             TableRecords = _controller.getMaxAllPaging();
-            MaxPage = (TableRecords / RecordsPerPage) + 1 ;
-            CurrentPage = MaxPage;
-            return CurrentPage;
+
+            switch ( RecordsPerPage )
+            {
+                case 0: // Show all
+                    MaxPage =  10;
+                    RecordsPerPage = TableRecords;
+                    break;
+                  default:
+                    MaxPage  = TableRecords/ RecordsPerPage;
+                    int rest = TableRecords % RecordsPerPage;
+                    //if (rest>0) MaxPage = MaxPage + 1;
+                    break;
+            }
+                               
+        }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            _controller.create500();
         }
     }
 }

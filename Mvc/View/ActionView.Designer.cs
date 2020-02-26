@@ -39,21 +39,22 @@
             this.AddButton = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TxtrecordsPerPage = new System.Windows.Forms.NumericUpDown();
-            this.RefreshButton = new System.Windows.Forms.Button();
-            this.TxtcurrentPage = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pageInfoLabel = new System.Windows.Forms.Label();
-            this.FirstButton = new System.Windows.Forms.Button();
-            this.PreviousButton = new System.Windows.Forms.Button();
-            this.NextButton = new System.Windows.Forms.Button();
             this.LastButton = new System.Windows.Forms.Button();
+            this.NextButton = new System.Windows.Forms.Button();
+            this.PreviousButton = new System.Windows.Forms.Button();
+            this.FirstButton = new System.Windows.Forms.Button();
+            this.pageInfoLabel = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TxtcurrentPage = new System.Windows.Forms.NumericUpDown();
+            this.RefreshButton = new System.Windows.Forms.Button();
+            this.TxtrecordsPerPage = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.CreateButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TxtrecordsPerPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TxtcurrentPage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TxtrecordsPerPage)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -156,6 +157,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.CreateButton);
             this.panel2.Controls.Add(this.LastButton);
             this.panel2.Controls.Add(this.NextButton);
             this.panel2.Controls.Add(this.PreviousButton);
@@ -171,47 +173,45 @@
             this.panel2.Size = new System.Drawing.Size(1240, 128);
             this.panel2.TabIndex = 3;
             // 
-            // label3
+            // LastButton
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Per Page";
+            this.LastButton.Location = new System.Drawing.Point(768, 32);
+            this.LastButton.Name = "LastButton";
+            this.LastButton.Size = new System.Drawing.Size(40, 32);
+            this.LastButton.TabIndex = 9;
+            this.LastButton.Text = ">>";
+            this.LastButton.UseVisualStyleBackColor = true;
+            this.LastButton.Click += new System.EventHandler(this.LastButton_Click);
             // 
-            // TxtrecordsPerPage
+            // NextButton
             // 
-            this.TxtrecordsPerPage.Location = new System.Drawing.Point(168, 16);
-            this.TxtrecordsPerPage.Name = "TxtrecordsPerPage";
-            this.TxtrecordsPerPage.Size = new System.Drawing.Size(120, 26);
-            this.TxtrecordsPerPage.TabIndex = 1;
+            this.NextButton.Location = new System.Drawing.Point(720, 32);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(40, 32);
+            this.NextButton.TabIndex = 8;
+            this.NextButton.Text = ">";
+            this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
-            // RefreshButton
+            // PreviousButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(312, 16);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(75, 32);
-            this.RefreshButton.TabIndex = 2;
-            this.RefreshButton.Text = "Go";
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            this.PreviousButton.Location = new System.Drawing.Point(664, 32);
+            this.PreviousButton.Name = "PreviousButton";
+            this.PreviousButton.Size = new System.Drawing.Size(40, 32);
+            this.PreviousButton.TabIndex = 7;
+            this.PreviousButton.Text = "<";
+            this.PreviousButton.UseVisualStyleBackColor = true;
+            this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
-            // TxtcurrentPage
+            // FirstButton
             // 
-            this.TxtcurrentPage.Location = new System.Drawing.Point(168, 56);
-            this.TxtcurrentPage.Name = "TxtcurrentPage";
-            this.TxtcurrentPage.Size = new System.Drawing.Size(120, 26);
-            this.TxtcurrentPage.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(64, 56);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 20);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Page";
+            this.FirstButton.Location = new System.Drawing.Point(616, 32);
+            this.FirstButton.Name = "FirstButton";
+            this.FirstButton.Size = new System.Drawing.Size(40, 32);
+            this.FirstButton.TabIndex = 6;
+            this.FirstButton.Text = "<<";
+            this.FirstButton.UseVisualStyleBackColor = true;
+            this.FirstButton.Click += new System.EventHandler(this.FirstButton_Click);
             // 
             // pageInfoLabel
             // 
@@ -224,45 +224,57 @@
             this.pageInfoLabel.Text = "pageInfoLabel";
             this.pageInfoLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FirstButton
+            // label4
             // 
-            this.FirstButton.Location = new System.Drawing.Point(616, 32);
-            this.FirstButton.Name = "FirstButton";
-            this.FirstButton.Size = new System.Drawing.Size(40, 32);
-            this.FirstButton.TabIndex = 6;
-            this.FirstButton.Text = "<<";
-            this.FirstButton.UseVisualStyleBackColor = true;
-            this.FirstButton.Click += new System.EventHandler(this.FirstButton_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(64, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 20);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Page";
             // 
-            // PreviousButton
+            // TxtcurrentPage
             // 
-            this.PreviousButton.Location = new System.Drawing.Point(664, 32);
-            this.PreviousButton.Name = "PreviousButton";
-            this.PreviousButton.Size = new System.Drawing.Size(40, 32);
-            this.PreviousButton.TabIndex = 7;
-            this.PreviousButton.Text = "<";
-            this.PreviousButton.UseVisualStyleBackColor = true;
-            this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
+            this.TxtcurrentPage.Location = new System.Drawing.Point(168, 56);
+            this.TxtcurrentPage.Name = "TxtcurrentPage";
+            this.TxtcurrentPage.Size = new System.Drawing.Size(120, 26);
+            this.TxtcurrentPage.TabIndex = 3;
             // 
-            // NextButton
+            // RefreshButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(720, 32);
-            this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(40, 32);
-            this.NextButton.TabIndex = 8;
-            this.NextButton.Text = ">";
-            this.NextButton.UseVisualStyleBackColor = true;
-            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
+            this.RefreshButton.Location = new System.Drawing.Point(312, 16);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(75, 32);
+            this.RefreshButton.TabIndex = 2;
+            this.RefreshButton.Text = "Go";
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
-            // LastButton
+            // TxtrecordsPerPage
             // 
-            this.LastButton.Location = new System.Drawing.Point(768, 32);
-            this.LastButton.Name = "LastButton";
-            this.LastButton.Size = new System.Drawing.Size(40, 32);
-            this.LastButton.TabIndex = 9;
-            this.LastButton.Text = ">>";
-            this.LastButton.UseVisualStyleBackColor = true;
-            this.LastButton.Click += new System.EventHandler(this.LastButton_Click);
+            this.TxtrecordsPerPage.Location = new System.Drawing.Point(168, 16);
+            this.TxtrecordsPerPage.Name = "TxtrecordsPerPage";
+            this.TxtrecordsPerPage.Size = new System.Drawing.Size(120, 26);
+            this.TxtrecordsPerPage.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(64, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 20);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Per Page";
+            // 
+            // CreateButton
+            // 
+            this.CreateButton.Location = new System.Drawing.Point(1064, 56);
+            this.CreateButton.Name = "CreateButton";
+            this.CreateButton.Size = new System.Drawing.Size(75, 40);
+            this.CreateButton.TabIndex = 10;
+            this.CreateButton.Text = "500";
+            this.CreateButton.UseVisualStyleBackColor = true;
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // ActionView
             // 
@@ -280,8 +292,8 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TxtrecordsPerPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TxtcurrentPage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TxtrecordsPerPage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -309,5 +321,6 @@
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Button PreviousButton;
         private System.Windows.Forms.Button FirstButton;
+        private System.Windows.Forms.Button CreateButton;
     }
 }

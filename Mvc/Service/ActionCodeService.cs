@@ -84,16 +84,17 @@ namespace MparWinForm07.Mvc.Service
                     .First();
             }
         }
-        public IList getAllPaging(int startPage, int showrecords)
+        public IList getAllPaging(int offset, int showrecords)
         {
             using (var context = new MyContext())
             {
                 int skipped = 0;
-                if (startPage>0) skipped = (startPage - 1) * showrecords;
-                else             skipped =  showrecords;
+                //if (startPage == 0)   skipped = 0;
+                //else if (startPage>0) skipped = (startPage ) * showrecords;
+               // else             skipped =  showrecords;
                 return context.Actioncode
                     .OrderBy(b => b.Actioncode)
-                    .Skip(startPage).Take(showrecords)
+                    .Skip(offset).Take(showrecords)
                     .ToList();
             }
         }
@@ -105,6 +106,37 @@ namespace MparWinForm07.Mvc.Service
                 return context.Actioncode
                     .OrderBy(b => b.Actioncode)
                     .Count();
+            }
+        }
+        
+
+        public void create500()
+        {
+            for (int i=1;  i < 500; i++)
+            {
+                string tekst = "";
+                using (var context = new MyContext())
+                {
+                    ActionCode code = new ActionCode();
+                    if (i < 10)
+                    {
+                        tekst = "000" + i;
+                    }
+                    else if (i < 100)
+                    {
+                        tekst = "00" + i;
+                    }
+                    else if (i < 1000)
+                    {
+                        tekst = "0" + i;
+                    }
+                    
+ 
+                    code.Actioncode = tekst;
+                    code.Description = "ABCDE_" + i;
+                    context.Add(code);
+                    context.SaveChanges();
+                } 
             }
         }
     }
