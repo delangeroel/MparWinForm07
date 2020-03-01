@@ -16,5 +16,15 @@ namespace MparWinForm07.Mvc.Model
         {
             optionsBuilder.UseSqlServer("server=.;database=MparWinForm07;trusted_connection=true;Integrated Security=True;");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ActionCode>()
+                .HasIndex(p => new { p.Actioncode, p.Description })
+                .IsUnique()
+                .HasName("Index_ActionCode");
+                // Create an index
+        }
     }
+
 }

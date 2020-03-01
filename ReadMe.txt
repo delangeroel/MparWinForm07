@@ -10,6 +10,9 @@ Microsoft.EntityFrameworkCore.Tools
 Install-Package Microsoft.EntityFrameworkCore.Tools
 Add-Migration InitialCreate
 Update-Database
+// Numeric opmaak/formatting
+https://documentation.devexpress.com/WindowsForms/1498/Controls-and-Libraries/Editors-and-Simple-Controls/Common-Editor-Features-and-Concepts/Input-Mask/Mask-Type-Numeric
+
 
 -------------------------------------------------------------------------------------------------------------------------------
 Database
@@ -39,3 +42,25 @@ Zet in Program.cs (het eerste programma dat opgestart word) nog voor dat er ook 
 Schermcontroles
 -------------------------------------------------------------------------------------------------------------------------------
 Toepassen zoals in ActionController en dan de save methode staat. Net voor de save check uitvoeren en afbreken indien er fouten gevonden zijn
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+ToDo
+-------------------------------------------------------------------------------------------------------------------------------
+-- Linq
+---- Select and where
+---- Group by
+---- Count records
+---- Value conversions
+-- Entity Core framework
+---- Create database 
+-- Lambdas 
+-- On screens
+---- Combobox on screen, position on selected, read selected etc.
+---- Dates on screen
+---- Numeric values on screen
+---- Amount on screen
+-- WPF
+-- Web
+-- Windows Communnications
