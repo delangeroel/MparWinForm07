@@ -17,16 +17,23 @@ namespace MparWinForm07.Mvc.Model
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Description text must be 4-20 pos.")]
         //[Column(TypeName = "varchar(20)")]// Exacte aanduiding
         public string Description { get; set; }
+         
+        public Kleuren Kleur { get; set; }
 
         //[Timestamp]
         //public byte[] Timestamp { get; set; }
 
 
         public ActionCode() { }
-        public ActionCode(string actioncode, string description)
+        public ActionCode(string actioncode, string description, Kleuren kleur)
         {
             this.Actioncode = actioncode;
             this.Description = description;
+            this.Kleur = kleur;
+        }
+        public enum Kleuren
+        {
+            Rood, Geel, Groen, Blauw, Zwart, Paars, Wit
         }
     }
 }

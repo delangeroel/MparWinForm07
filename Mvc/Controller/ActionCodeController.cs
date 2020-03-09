@@ -27,7 +27,6 @@ namespace MparWinForm07.Mvc.Controller
             actionCodeService = new ActionCodeService();
         }
 
-
         public IList Action()
         {
             return ArrayList.ReadOnly(_actioncodesList);
@@ -35,14 +34,13 @@ namespace MparWinForm07.Mvc.Controller
 
         public void AddNew()
         {
-            _selectedObject = new ActionCode("", "");
+            _selectedObject = new ActionCode("", "", ActionCode.Kleuren.Geel);
 
             this.UpdateViewDetailValues(_selectedObject);
             this._view.CanModifyID = true;
         }
 
         public void LoadView() {
-
             getAllSinglePage(0, 10);
         }
         public void LoadView(int offset, int showrecords)
@@ -173,12 +171,16 @@ namespace MparWinForm07.Mvc.Controller
         {
             _view.Actioncode = action.Actioncode;
             _view.Description = action.Description;
+            _view.Kleur = action.Kleur;
         }
 
         public void UpdateWithViewValues(ActionCode action)//
         {
             action.Actioncode = _view.Actioncode;
             action.Description = _view.Description;
+
+            action.Kleur = _view.Kleur; 
+            
         }
 
         public int getMaxAllPaging()// Count number of records in table

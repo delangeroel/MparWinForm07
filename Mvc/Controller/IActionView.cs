@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MparWinForm07.Mvc.Model;
+using static MparWinForm07.Mvc.Model.ActionCode;
 
 namespace MparWinForm07.Mvc.Controller
 {
@@ -19,6 +20,7 @@ namespace MparWinForm07.Mvc.Controller
 
         string Actioncode { get; set; }
         string Description { get; set; }
+        Kleuren Kleur { get; set; }
         bool CanModifyID { set; }
     }
 }

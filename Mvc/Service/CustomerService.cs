@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MparWinForm07.Mvc.Service
 {
-    public class ActionCodeService
+    public class CustomerService
     {
-        public void save(ActionCode actionCode)
+        public void save(Customer customer)
         {
             using (var context = new MyContext())
             {
@@ -19,28 +18,7 @@ namespace MparWinForm07.Mvc.Service
                 {
                     try
                     {
-                        context.Actioncode.Add(actionCode);
-                        
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                    catch (Exception)
-                    {
-                        transaction.Rollback();
-                    }
-                }
-            }
-        }
-
-        public void delete(ActionCode actionCode)
-        {
-            using (var context = new MyContext())
-            {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        context.Actioncode.Remove(actionCode);
+                        context.Customer.Add(customer);
 
                         context.SaveChanges();
                         transaction.Commit();
@@ -53,12 +31,33 @@ namespace MparWinForm07.Mvc.Service
             }
         }
 
-        public IList getAllActionCodes() 
+        public void delete(Customer actionCode)
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.Customer.Remove(actionCode);
+
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        public IList getAllCustomers()
+        {
+            using (var context = new MyContext())
+            {
+                return context.Country
+                    .OrderBy(b => b.countrycode)
                     .ToList();
             }
         }
@@ -67,20 +66,19 @@ namespace MparWinForm07.Mvc.Service
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
-                    .Where(b => b.Actioncode.StartsWith(partialtext))
+                return context.Customer
+                    .OrderBy(b => b.CustomerNumber)
                     .ToList();
             }
         }
 
-        public ActionCode getActionCode(string actionCode)
+        public Customer getActionCode(int customerNumber)
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
-                    .Where(b => b.Actioncode.Equals(actionCode))
+                return context.Customer
+                    .OrderBy(b => b.CustomerNumber)
+                    .Where(b => b.CustomerNumber == customerNumber )
                     .First();
             }
         }
@@ -88,12 +86,8 @@ namespace MparWinForm07.Mvc.Service
         {
             using (var context = new MyContext())
             {
-                int skipped = 0;
-                //if (startPage == 0)   skipped = 0;
-                //else if (startPage>0) skipped = (startPage ) * showrecords;
-               // else             skipped =  showrecords;
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
+                return context.Customer
+                    .OrderBy(b => b.CustomerNumber)
                     .Skip(offset).Take(showrecords)
                     .ToList();
             }
@@ -103,20 +97,20 @@ namespace MparWinForm07.Mvc.Service
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
+                return context.Customer
+                    .OrderBy(b => b.CustomerNumber)
                     .Count();
             }
         }
-        
+
         public void create500()
         {
-            for (int i=1;  i < 500; i++)
+            for (int i = 1; i < 500; i++)
             {
                 string tekst = "";
                 using (var context = new MyContext())
                 {
-                    ActionCode code = new ActionCode();
+                    Customer customer = new Customer();
                     if (i < 10)
                     {
                         tekst = "000" + i;
@@ -129,13 +123,15 @@ namespace MparWinForm07.Mvc.Service
                     {
                         tekst = "0" + i;
                     }
-                    
- 
-                    code.Actioncode = tekst;
-                    code.Description = "ABCDE_" + i;
-                    context.Add(code);
+
+
+                    customer.CustomerNumber = i;
+                    customer.Name = "Name_" + i;
+                    customer.Address = "Add" + i;
+                    customer.City = "City" + i;
+                    context.Add(customer);
                     context.SaveChanges();
-                } 
+                }
             }
         }
     }

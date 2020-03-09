@@ -1,6 +1,6 @@
 ﻿namespace MparWinForm07.Mvc.View
 {
-    partial class ActionView
+    partial class LoanView
     {
         /// <summary>
         /// Required designer variable.
@@ -297,7 +297,7 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Per Page";
             // 
-            // ActionView
+            // LoanView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -306,8 +306,8 @@
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
-            this.Name = "ActionView";
-            this.Text = "ActionView";
+            this.Name = "LoanView";
+            this.Text = "LoanView";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);

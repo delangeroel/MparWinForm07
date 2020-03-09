@@ -107,6 +107,7 @@
       <HintPath>packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
@@ -147,25 +148,57 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Linq\LinqExample01.cs" />
     <Compile Include="Migrations\20200223153335_InitialCreate.cs" />
     <Compile Include="Migrations\20200223153335_InitialCreate.designer.cs">
       <DependentUpon>20200223153335_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MyContextModelSnapshot.cs" />
     <Compile Include="Mvc\Controller\ActionCodeController.cs" />
+    <Compile Include="Mvc\Controller\CountryController.cs" />
+    <Compile Include="Mvc\Controller\CustomerController.cs" />
     <Compile Include="Mvc\Controller\IActionController.cs" />
     <Compile Include="Mvc\Controller\IActionView.cs" />
+    <Compile Include="Mvc\Controller\ICountryView.cs" />
+    <Compile Include="Mvc\Controller\ICustomerView.cs" />
+    <Compile Include="Mvc\Controller\ILoanView.cs" />
     <Compile Include="Mvc\Controller\IUsersView.cs" />
+    <Compile Include="Mvc\Controller\LoanController.cs" />
     <Compile Include="Mvc\Controller\UsersController.cs" />
     <Compile Include="Mvc\Model\ActionCode.cs" />
+    <Compile Include="Mvc\Model\Country.cs" />
+    <Compile Include="Mvc\Model\Customer.cs" />
+    <Compile Include="Mvc\Model\Loan.cs" />
     <Compile Include="Mvc\Model\MyContext.cs" />
+    <Compile Include="Mvc\Model\Status.cs" />
     <Compile Include="Mvc\Model\User.cs" />
     <Compile Include="Mvc\Service\ActionCodeService.cs" />
+    <Compile Include="Mvc\Service\CountryService.cs" />
+    <Compile Include="Mvc\Service\CustomerService.cs" />
+    <Compile Include="Mvc\Service\LoanService.cs" />
     <Compile Include="Mvc\View\ActionView.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Mvc\View\ActionView.Designer.cs">
       <DependentUpon>ActionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mvc\View\CountryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mvc\View\CountryView.Designer.cs">
+      <DependentUpon>CountryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mvc\View\CustomerView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mvc\View\CustomerView.Designer.cs">
+      <DependentUpon>CustomerView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mvc\View\LoanView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mvc\View\LoanView.Designer.cs">
+      <DependentUpon>LoanView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,6 +207,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mvc\View\ActionView.resx">
       <DependentUpon>ActionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\View\CountryView.resx">
+      <DependentUpon>CountryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\View\CustomerView.resx">
+      <DependentUpon>CustomerView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\View\LoanView.resx">
+      <DependentUpon>LoanView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

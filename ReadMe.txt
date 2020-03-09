@@ -37,6 +37,11 @@ Zet in Program.cs (het eerste programma dat opgestart word) nog voor dat er ook 
             var culture = new System.Globalization.CultureInfo("nl-NL");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
+-------------------------------------------------------------------------------------------------------------------------------
+Debug window
+-------------------------------------------------------------------------------------------------------------------------------
+            https://docs.microsoft.com/en-us/visualstudio/ide/reference/immediate-window?view=vs-2019
+            CRTL+ALT+I
 
 -------------------------------------------------------------------------------------------------------------------------------
 Schermcontroles

@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MparWinForm07.Mvc.Service
 {
-    public class ActionCodeService
+    public class CountryService
     {
-        public void save(ActionCode actionCode)
+        public void save(Country actionCode)
         {
             using (var context = new MyContext())
             {
@@ -19,28 +18,7 @@ namespace MparWinForm07.Mvc.Service
                 {
                     try
                     {
-                        context.Actioncode.Add(actionCode);
-                        
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                    catch (Exception)
-                    {
-                        transaction.Rollback();
-                    }
-                }
-            }
-        }
-
-        public void delete(ActionCode actionCode)
-        {
-            using (var context = new MyContext())
-            {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        context.Actioncode.Remove(actionCode);
+                        context.Country.Add(actionCode);
 
                         context.SaveChanges();
                         transaction.Commit();
@@ -53,12 +31,33 @@ namespace MparWinForm07.Mvc.Service
             }
         }
 
-        public IList getAllActionCodes() 
+        public void delete(Country actionCode)
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.Country.Remove(actionCode);
+
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+
+        public IList getAllCountries()
+        {
+            using (var context = new MyContext())
+            {
+                return context.Country
+                    .OrderBy(b => b.countrycode)
                     .ToList();
             }
         }
@@ -67,20 +66,20 @@ namespace MparWinForm07.Mvc.Service
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
-                    .Where(b => b.Actioncode.StartsWith(partialtext))
+                return context.Country
+                    .OrderBy(b => b.countrycode)
+                    .Where(b => b.countrycode.StartsWith(partialtext))
                     .ToList();
             }
         }
 
-        public ActionCode getActionCode(string actionCode)
+        public Country getActionCode(string actionCode)
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
-                    .Where(b => b.Actioncode.Equals(actionCode))
+                return context.Country
+                    .OrderBy(b => b.countrycode)
+                    .Where(b => b.countrycode.Equals(actionCode))
                     .First();
             }
         }
@@ -89,11 +88,8 @@ namespace MparWinForm07.Mvc.Service
             using (var context = new MyContext())
             {
                 int skipped = 0;
-                //if (startPage == 0)   skipped = 0;
-                //else if (startPage>0) skipped = (startPage ) * showrecords;
-               // else             skipped =  showrecords;
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
+                return context.Country
+                    .OrderBy(b => b.countrycode)
                     .Skip(offset).Take(showrecords)
                     .ToList();
             }
@@ -108,15 +104,15 @@ namespace MparWinForm07.Mvc.Service
                     .Count();
             }
         }
-        
+
         public void create500()
         {
-            for (int i=1;  i < 500; i++)
+            for (int i = 1; i < 500; i++)
             {
                 string tekst = "";
                 using (var context = new MyContext())
                 {
-                    ActionCode code = new ActionCode();
+                    Country country = new Country();
                     if (i < 10)
                     {
                         tekst = "000" + i;
@@ -129,13 +125,13 @@ namespace MparWinForm07.Mvc.Service
                     {
                         tekst = "0" + i;
                     }
-                    
- 
-                    code.Actioncode = tekst;
-                    code.Description = "ABCDE_" + i;
-                    context.Add(code);
+
+
+                    country.countrycode = tekst;
+                    country.countryName = "ABCDE_" + i;
+                    context.Add(country);
                     context.SaveChanges();
-                } 
+                }
             }
         }
     }

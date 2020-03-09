@@ -13,9 +13,9 @@ using static MparWinForm07.Mvc.Model.ActionCode;
 
 namespace MparWinForm07.Mvc.View
 {
-    public partial class ActionView : Form, IActionView
+    public partial class LoanView : Form, ILoanView
     {
-        public ActionView()
+        public LoanView()
         {
             InitializeComponent();
             PostInit();
@@ -24,7 +24,7 @@ namespace MparWinForm07.Mvc.View
         private void PostInit()
         {
             txComboKleur.DataSource = Enum.GetValues(typeof(Kleuren));
-            XCurrentPage.Value  = 0;
+            XCurrentPage.Value = 0;
             XRecordsPerPage.Value = 10;
         }
         ActionCodeController _controller;
@@ -33,7 +33,8 @@ namespace MparWinForm07.Mvc.View
         private int TableRecords;
         private int MaxPage;
 
-        public string Actioncode 
+
+        public string Actioncode
         {
             get { return txtActionCode.Text; }
             set { this.txtActionCode.Text = value; }
@@ -50,11 +51,20 @@ namespace MparWinForm07.Mvc.View
             set { txComboKleur.SelectedItem = value; }
         }
 
- 
-        public bool CanModifyID 
+
+        public bool CanModifyID
         {
-            set { this.txtActionCode.Enabled = value; } 
+            set { this.txtActionCode.Enabled = value; }
         }
+
+        public long id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int customerNumber { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public decimal amount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime intrestDay { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string user { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime changeDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Status status { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public byte[] Timestamp { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -91,7 +101,7 @@ namespace MparWinForm07.Mvc.View
             ListViewItem parent;
             parent = this.listView1.Items.Add("" + action.Actioncode);
             parent.SubItems.Add("" + action.Description);
-            parent.SubItems.Add(action.Kleur.ToString() );
+            parent.SubItems.Add(action.Kleur.ToString());
         }
 
         public void UpdateGrid(Model.ActionCode action)
@@ -179,11 +189,11 @@ namespace MparWinForm07.Mvc.View
 
         private void LastButton_Click(object sender, EventArgs e)
         {
-            refreshPagingInfo(Direction.Last,0);
+            refreshPagingInfo(Direction.Last, 0);
         }
 
         private void refreshPagingInfo(Direction direction, int Page)
-        {   
+        {
             int CurrentPage = (int)XCurrentPage.Value;
             if (direction.Equals(Direction.Refresh)) CurrentPage = Page;
 
@@ -193,7 +203,7 @@ namespace MparWinForm07.Mvc.View
             MaxPage = TableRecords / RecordsPerPage;
             int rest = TableRecords % RecordsPerPage;
 
-            switch ( direction  )
+            switch (direction)
             {
                 case Direction.First: // Show all
                     CurrentPage = 0;
@@ -221,9 +231,30 @@ namespace MparWinForm07.Mvc.View
         {
             _controller.create500();
         }
-    }
-    enum Direction
-    {
-        First, Previous, Refresh, Next, Last
+
+        public void SetController(LoanController controller)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddToGrid(Loan loan)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateGrid(Loan loan)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveFromGrid(Loan loan)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetSelectedInGrid(Loan loan)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
