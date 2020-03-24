@@ -77,6 +77,11 @@ namespace MparWinForm07.Mvc.View
         // ----------------------------
         // Interface
         // ----------------------------
+        public void EnableInput(Boolean enable)
+        {
+            this.txtBlogId.Enabled = enable;
+            this.txtUrl.Enabled = enable;
+        }
         public void SetController(Blog2Controller controller)
         {
             _controller = controller;
@@ -123,14 +128,21 @@ namespace MparWinForm07.Mvc.View
             return listView1.FocusedItem.Index;
         }
         public void SetIndexOfGrid(int index)
-        { 
-            if (index > 0)
+        {
+            if (index >= 0)
             {
                 listView1.Items[index].Selected = true;
                 listView1.Select();
+                EnableInput(true);
             }
-
+            else
+            {
+                EnableInput(false);
+            }
         }
+
+ 
+ 
         // ----------------------------
         // Field mappaing with Interface
         // ----------------------------

@@ -10,7 +10,7 @@ namespace MparWinForm07.Mvc.Controller
     public interface IBlog2View
     {
         void SetController(Blog2Controller controller);
-
+        void EnableInput(Boolean enable);
         void ClearGrid();
         void AddToGrid(Blog blog);
         void UpdateGrid(Blog blog);

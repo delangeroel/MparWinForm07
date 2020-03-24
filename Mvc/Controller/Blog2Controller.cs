@@ -111,8 +111,17 @@ namespace MparWinForm07.Mvc.Controller
             //foreach (Blog blog in _blogs)
             //    _view.AddToGrid(blog);
             getAllSinglePage(0, 10);
-            if (_blogs.Count>0)
-            _view.SetIndexOfGrid(0);
+
+            if (_blogs.Count > 0)
+            {
+                _view.SetIndexOfGrid(0);           
+                
+            }
+            else
+            {
+                _view.EnableInput( false );
+            }
+            
         }
   
         // ----------------------------
@@ -126,7 +135,7 @@ namespace MparWinForm07.Mvc.Controller
                 selectedRow = index;
                 _selectedBlog = (Blog)_blogs[index];
                 updateView(_selectedBlog);
-                _view.SetIndexOfGrid(index);
+      //          _view.SetIndexOfGrid(index);
                 this._view.CanModifyID = false;
 
             }
