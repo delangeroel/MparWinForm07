@@ -11,6 +11,7 @@ namespace MparWinForm07.Mvc.Model
     public class ActionCode
     {
         [Key]
+        [StringLength(10)]
         public string Actioncode { get; set; }
         
         [Required(AllowEmptyStrings = false, ErrorMessage = "Description is required")]

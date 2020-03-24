@@ -5,13 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MparWinForm07.Mvc.Service
 {
-    public class CountryService
+    public class BlogService
     {
-        public void save(Country country)
+        public void save(Blog blog)
         {
             using (var context = new MyContext())
             {
@@ -19,35 +18,7 @@ namespace MparWinForm07.Mvc.Service
                 {
                     try
                     {
-                        context.Country.Add(country);
-                        //DateTime now = DateTime.Now;
-                        //long bNow = now.ToBinary();
-                        //byte[] arrayNow = BitConverter.GetBytes(bNow);
-
-                        long getLong = BitConverter.ToInt64(country.Timestamp, 0);
-                        DateTime getNow = DateTime.FromBinary(getLong);
-
-                        context.SaveChanges();
-                        transaction.Commit();
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message);
-                        transaction.Rollback();
-                    }
-                }
-            }
-        }
-
-        public void delete(Country actionCode)
-        {
-            using (var context = new MyContext())
-            {
-                using (var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        context.Country.Remove(actionCode);
+                        context.Blog.Add(blog);
 
                         context.SaveChanges();
                         transaction.Commit();
@@ -59,35 +30,51 @@ namespace MparWinForm07.Mvc.Service
                 }
             }
         }
-
-        public IList getAllCountries()
+        public void delete(Blog blog)
         {
             using (var context = new MyContext())
             {
-                return context.Country
-                    .OrderBy(b => b.Countrycode)
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.Blog.Remove(blog);
+
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
+        }
+        public IList getAllBlogs()
+        {
+            using (var context = new MyContext())
+            {
+                return context.Blog
+                    .OrderBy(b => b.BlogId)
                     .ToList();
             }
         }
-
         public IList getCodes(string partialtext)
         {
             using (var context = new MyContext())
             {
-                return context.Country
-                    .OrderBy(b => b.Countrycode)
-                    .Where(b => b.Countrycode.StartsWith(partialtext))
+                return context.Blog
+                    .OrderBy(b => b.BlogId)
                     .ToList();
             }
         }
-
-        public Country getActionCode(string actionCode)
+        public Blog getBlogCode(long id)
         {
             using (var context = new MyContext())
             {
-                return context.Country
-                    .OrderBy(b => b.Countrycode)
-                    .Where(b => b.Countrycode.Equals(actionCode))
+                return context.Blog
+                    .OrderBy(b => b.BlogId)
+                    .Where(b => b.BlogId==(id))
                     .First();
             }
         }
@@ -95,33 +82,29 @@ namespace MparWinForm07.Mvc.Service
         {
             using (var context = new MyContext())
             {
-                IList lst = context.Country
-                    .OrderBy(b => b.Countrycode)
+                return context.Blog
+                    .OrderBy(b => b.BlogId)
                     .Skip(offset).Take(showrecords)
                     .ToList();
-                if (lst == null) lst = new ArrayList();
-                return lst;
             }
         }
-
         public int getMaxAllPaging()
         {
             using (var context = new MyContext())
             {
-                return context.Actioncode
-                    .OrderBy(b => b.Actioncode)
+                return context.Blog
+                    .OrderBy(b => b.BlogId)
                     .Count();
             }
         }
-
-        public void create500()
+        public void createRecords(int numberOfRecords)
         {
-            for (int i = 1; i < 500; i++)
+            for (int i = 1; i < numberOfRecords; i++)
             {
                 string tekst = "";
                 using (var context = new MyContext())
                 {
-                    Country country = new Country();
+                    Blog blog = new Blog();
                     if (i < 10)
                     {
                         tekst = "000" + i;
@@ -134,11 +117,8 @@ namespace MparWinForm07.Mvc.Service
                     {
                         tekst = "0" + i;
                     }
-
-
-                    country.Countrycode = tekst;
-                    country.CountryName = "ABCDE_" + i;
-                    context.Add(country);
+    
+                    context.Add(blog);
                     context.SaveChanges();
                 }
             }

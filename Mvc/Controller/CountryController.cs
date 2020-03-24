@@ -14,9 +14,9 @@ namespace MparWinForm07.Mvc.Controller
     public class CountryController 
     {
         ICountryView _view;
-        IList _countriessList;
+        IList _countriessList;       
         Country _selectedObject;
-        CountryService countryService;
+        CountryService countryService = new CountryService();
 
         public CountryController(ICountryView view, IList countriesList)//
         {
@@ -50,14 +50,21 @@ namespace MparWinForm07.Mvc.Controller
                 _view.AddToGrid(country);
 
             if (_countriessList.Count > 0)
+            {
                 _view.SetSelectedInGrid((Country)_countriessList[0]);
+
+            }
+                
         }
 
         public void getAllSinglePage(int offset, int showrecords)
         {
             _view.ClearGrid();
             foreach (Country country in countryService.getAllPaging(offset, showrecords))
+            {
                 _view.AddToGrid(country);
+            }
+                
 
             if (_countriessList.Count > 0)
                 _view.SetSelectedInGrid((Country)_countriessList[0]);
@@ -65,43 +72,44 @@ namespace MparWinForm07.Mvc.Controller
 
         public void Remove()
         {
-            string id = this._view.GetIdOfSelectedInGrid();
-            Country countrynToRemove = null;
-
-            if (id != "")
+            int index = _view.GetSelectedIndex();
+            // Remove from screen
+            // Remove from list
+            // Remove from disk
+            try
             {
-                foreach (Country country in this._countriessList)
-                {
-                    if (country.countrycode.CompareTo(id) == 0)
-                    {
-                        countrynToRemove = country;
-                        break;
-                    }
-                }
+                countryService.delete(_selectedObject);
+                this._countriessList.RemoveAt(index);
+                _view.RemoveFromGrid(index);
+            }
+            catch (Exception)
+            {
 
-                if (countrynToRemove != null)
-                {
-                    countryService.delete(_selectedObject);
-                    int newSelectedIndex = this._countriessList.IndexOf(countrynToRemove);
-                    this._countriessList.Remove(countrynToRemove);
-                    this._view.RemoveFromGrid(countrynToRemove);
-
-                    if (newSelectedIndex > -1 && newSelectedIndex < _countriessList.Count)
-                    {
-                        this._view.SetSelectedInGrid((Country)_countriessList[newSelectedIndex]);
-                    }
-                }
             }
         }
 
         public void Save()
         {
+            int index = _view.GetSelectedIndex();
+
+            // Move fields from screen to object
+            // Check on errors
+            // If no errors, determine add or update situation
+            // When add: 
+            //     Save record and update screen and array
+            // When update:
+            //     Save record and update screen and array
+            //     Position cursor on updated object
+            // 
             UpdateWithViewValues(_selectedObject);
             if (hasErrors(_selectedObject)) return;
 
-
-            if (!this._countriessList.Contains(_selectedObject))
+            int x = _view.GetSelectedIndex();
+            if (_view.GetSelectedIndex()<0)
             {
+
+                long getLong = BitConverter.ToInt64(_selectedObject.Timestamp, 0);
+                DateTime getNow = DateTime.FromBinary(getLong);
 
                 countryService.save(_selectedObject);
                 // Add new user
@@ -111,6 +119,10 @@ namespace MparWinForm07.Mvc.Controller
             else
             {
                 // Update existing
+
+                long getLong = BitConverter.ToInt64(_selectedObject.Timestamp, 0);
+                DateTime getNow = DateTime.FromBinary(getLong);
+
                 countryService.save(_selectedObject);
                 this._view.UpdateGrid(_selectedObject);
             }
@@ -146,21 +158,30 @@ namespace MparWinForm07.Mvc.Controller
             // EF YourDbContext.Entity(YourEntity).GetValidationResult();
         }
 
-        public void SelectedChanged(string actionKey)
+        public void SelectedChanged(string key)
         {
             foreach (Country country in this._countriessList)
             {
-                if (country.countrycode.CompareTo(actionKey) == 0)
+                if (country.Countrycode.CompareTo(key) == 0)
                 {
                     _selectedObject = country;
+                    long getLong = BitConverter.ToInt64(country.Timestamp, 0);
+                    DateTime getNow = DateTime.FromBinary(getLong);
 
                     // Refresh
                     CountryService countryService = new CountryService();
-                    _selectedObject = countryService.getActionCode(_selectedObject.countrycode);
+                    _selectedObject = countryService.getActionCode(_selectedObject.Countrycode);
+                      getLong = BitConverter.ToInt64(_selectedObject.Timestamp, 0);
+                      getNow = DateTime.FromBinary(getLong);
                     // End Refresh
 
                     UpdateViewDetailValues(_selectedObject);
+                    getLong = BitConverter.ToInt64(_selectedObject.Timestamp, 0);
+                    getNow = DateTime.FromBinary(getLong);
+
                     _view.SetSelectedInGrid(_selectedObject);
+                    getLong = BitConverter.ToInt64(_selectedObject.Timestamp, 0);
+                    getNow = DateTime.FromBinary(getLong);
                     this._view.CanModifyID = false;
                     break;
                 }
@@ -169,14 +190,16 @@ namespace MparWinForm07.Mvc.Controller
 
         public void UpdateViewDetailValues(Country country)//
         {
-            _view.countrycode = country.countrycode;
-            _view.countryName= country.countryName; 
+            _view.countrycode = country.Countrycode;
+            _view.countryName= country.CountryName;
+            //_view.Timestamp = country.Timestamp;
         }
 
         public void UpdateWithViewValues(Country country)//
         {
-            country.countrycode = _view.countrycode;
-            country.countryName = _view.countryName; 
+            country.Countrycode = _view.countrycode;
+            country.CountryName = _view.countryName;
+            //country.Timestamp = _view.Timestamp;
         }
 
         public int getMaxAllPaging()// Count number of records in table

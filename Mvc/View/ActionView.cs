@@ -222,7 +222,7 @@ namespace MparWinForm07.Mvc.View
             _controller.create500();
         }
     }
-    enum Direction
+    public enum Direction
     {
         First, Previous, Refresh, Next, Last
     }

@@ -15,6 +15,12 @@ namespace MparWinForm07.Mvc.View
 {
     public partial class LoanView : Form, ILoanView
     {
+        LoanController _controller;
+
+        // Paging
+        private int TableRecords;
+        private int MaxPage;
+
         public LoanView()
         {
             InitializeComponent();
@@ -22,49 +28,63 @@ namespace MparWinForm07.Mvc.View
         }
 
         private void PostInit()
-        {
-            txComboKleur.DataSource = Enum.GetValues(typeof(Kleuren));
+        {     
             XCurrentPage.Value = 0;
             XRecordsPerPage.Value = 10;
+            txComboStatus.DataSource = Enum.GetValues(typeof(Status));
         }
-        ActionCodeController _controller;
+                
 
-        // Paging
-        private int TableRecords;
-        private int MaxPage;
-
-
-        public string Actioncode
+        public long id
         {
-            get { return txtActionCode.Text; }
-            set { this.txtActionCode.Text = value; }
+            get { return Convert.ToInt32(txtId.Text); }
+            set { this.txtUser.Text = ""+value; }
         }
-        public string Description
+        public decimal amount
         {
-            get { return txtDescription.Text; }
-            set { this.txtDescription.Text = value; }
+            get { return Convert.ToDecimal(txtAmount.Text); }
+            set { this.txtAmount.Text = ""+value; }
         }
-        private Kleuren _Kleur;
-        public Kleuren Kleur
+        public int customerNumber 
         {
-            get { return (Kleuren)txComboKleur.SelectedItem; }
-            set { txComboKleur.SelectedItem = value; }
+            get { return Convert.ToInt32(txtCustomerNumber.Text); }
+            set { this.txtCustomerNumber.Text = ""+value; }
+        }
+        public DateTime intrestDay
+        {
+            get { return Convert.ToDateTime(txtUser.Text); }
+            set { this.txtUser.Text = ""+value; }
+        }
+ 
+        public string user
+        {
+            get { return txtUser.Text; }
+            set { this.txtUser.Text = value; }
+        }
+        public DateTime changeDate
+        {
+            get { return Convert.ToDateTime(txtChangeDate.Text); }
+            set { this.txtChangeDate.Text = ""+value; }
+        }
+        public Status status
+        {
+            get { return (Status)txComboStatus.SelectedItem; }
+            set { txComboStatus.SelectedItem = value; }
+        }
+        public DateTime Timestamp
+        {
+            get { return Convert.ToDateTime(txtTimestamp.Text); }
+            set { this.txtTimestamp.Text = ""+value; }
         }
 
-
+        byte[] ILoanView.Timestamp { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool CanModifyID
         {
-            set { this.txtActionCode.Enabled = value; }
+            set { this.txtUser.Enabled = value; }
         }
 
-        public long id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int customerNumber { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public decimal amount { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime intrestDay { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string user { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime changeDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Status status { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public byte[] Timestamp { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+
 
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -81,7 +101,7 @@ namespace MparWinForm07.Mvc.View
             _controller.Save();
         }
 
-        public void SetController(ActionCodeController controller)
+        public void SetController(LoanController controller)
         {
             this._controller = controller;
         }
@@ -89,19 +109,29 @@ namespace MparWinForm07.Mvc.View
         public void ClearGrid()
         {
             this.listView1.Columns.Clear();
-            this.listView1.Columns.Add("Action code", 200, HorizontalAlignment.Left);
-            this.listView1.Columns.Add("Description", 200, HorizontalAlignment.Left);
-            this.listView1.Columns.Add("Kleur", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("Id", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("CustomerNumber", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("Amount", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("IntrestDay", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("User", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("ChangeDate", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("Status", 200, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("Timestamp", 200, HorizontalAlignment.Left);
             // Add rows to grid
             this.listView1.Items.Clear();
         }
 
-        public void AddToGrid(ActionCode action)
+        public void AddToGrid(Loan loan)
         {
             ListViewItem parent;
-            parent = this.listView1.Items.Add("" + action.Actioncode);
-            parent.SubItems.Add("" + action.Description);
-            parent.SubItems.Add(action.Kleur.ToString());
+            parent = this.listView1.Items.Add("" + loan.Id);
+            parent.SubItems.Add("" + loan.CustomerNumber);
+            parent.SubItems.Add("" + loan.Amount);
+            parent.SubItems.Add("" + loan.IntrestDay);
+            parent.SubItems.Add("" + loan.User);
+            parent.SubItems.Add("" + loan.ChangeDate);
+            parent.SubItems.Add("" + loan.Status);
+            parent.SubItems.Add("" + loan.Timestamp);
         }
 
         public void UpdateGrid(Model.ActionCode action)
@@ -164,7 +194,7 @@ namespace MparWinForm07.Mvc.View
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.listView1.SelectedItems.Count > 0)
-                this._controller.SelectedChanged(this.listView1.SelectedItems[0].Text);
+                this._controller.SelectedChanged( Convert.ToInt64(listView1.SelectedItems[0].Text));
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
@@ -231,30 +261,54 @@ namespace MparWinForm07.Mvc.View
         {
             _controller.create500();
         }
-
-        public void SetController(LoanController controller)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddToGrid(Loan loan)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void UpdateGrid(Loan loan)
         {
-            throw new NotImplementedException();
+            ListViewItem rowToUpdate = null;
+
+            foreach (ListViewItem row in this.listView1.Items)
+            {
+                if (row.Text.CompareTo(""+loan.Id) == 0)
+                {
+                    rowToUpdate = row;
+                }
+            }
+
+            if (rowToUpdate != null)
+            {
+                rowToUpdate.Text = ""+loan.Id;
+                rowToUpdate.SubItems[1].Text = ""+loan.CustomerNumber;
+            }
         }
 
         public void RemoveFromGrid(Loan loan)
         {
-            throw new NotImplementedException();
+            ListViewItem rowToRemove = null;
+
+            foreach (ListViewItem row in this.listView1.Items)
+            {
+                if (row.Text.CompareTo(""+loan.Id) == 0)
+                {
+                    rowToRemove = row;
+                }
+            }
+
+            if (rowToRemove != null)
+            {
+                this.listView1.Items.Remove(rowToRemove);
+                this.listView1.Focus();
+            }
         }
 
         public void SetSelectedInGrid(Loan loan)
         {
-            throw new NotImplementedException();
+            foreach (ListViewItem row in this.listView1.Items)
+            {
+                if (row.Text.CompareTo(""+loan.Id) == 0)
+                {
+                    row.Selected = true;
+                }
+            }
         }
     }
 }

@@ -36,6 +36,42 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>packages\Portable.BouncyCastle.1.8.5\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.barcodes, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.barcodes.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.forms, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.forms.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.io, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.io.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.kernel, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.layout, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.layout.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.pdfa, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.sign, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.sign.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.styledxmlparser, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.styledxmlparser.dll</HintPath>
+    </Reference>
+    <Reference Include="itext.svg, Version=7.1.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\itext7.7.1.10\lib\net40\itext.svg.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -149,16 +185,21 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Linq\LinqExample01.cs" />
-    <Compile Include="Migrations\20200223153335_InitialCreate.cs" />
-    <Compile Include="Migrations\20200223153335_InitialCreate.designer.cs">
-      <DependentUpon>20200223153335_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\20200321141239_InitialCreate.cs" />
+    <Compile Include="Migrations\20200321141239_InitialCreate.designer.cs">
+      <DependentUpon>20200321141239_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MyContextModelSnapshot.cs" />
     <Compile Include="Mvc\Controller\ActionCodeController.cs" />
+    <Compile Include="Mvc\Controller\Blog2Controller.cs" />
+    <Compile Include="Mvc\Controller\BlogController.cs" />
     <Compile Include="Mvc\Controller\CountryController.cs" />
     <Compile Include="Mvc\Controller\CustomerController.cs" />
     <Compile Include="Mvc\Controller\IActionController.cs" />
     <Compile Include="Mvc\Controller\IActionView.cs" />
+    <Compile Include="Mvc\Controller\IBlog2View.cs" />
+    <Compile Include="Mvc\Controller\iBlogController.cs" />
+    <Compile Include="Mvc\Controller\IBlogView.cs" />
     <Compile Include="Mvc\Controller\ICountryView.cs" />
     <Compile Include="Mvc\Controller\ICustomerView.cs" />
     <Compile Include="Mvc\Controller\ILoanView.cs" />
@@ -166,6 +207,7 @@
     <Compile Include="Mvc\Controller\LoanController.cs" />
     <Compile Include="Mvc\Controller\UsersController.cs" />
     <Compile Include="Mvc\Model\ActionCode.cs" />
+    <Compile Include="Mvc\Model\Blog.cs" />
     <Compile Include="Mvc\Model\Country.cs" />
     <Compile Include="Mvc\Model\Customer.cs" />
     <Compile Include="Mvc\Model\Loan.cs" />
@@ -173,6 +215,7 @@
     <Compile Include="Mvc\Model\Status.cs" />
     <Compile Include="Mvc\Model\User.cs" />
     <Compile Include="Mvc\Service\ActionCodeService.cs" />
+    <Compile Include="Mvc\Service\BlogService.cs" />
     <Compile Include="Mvc\Service\CountryService.cs" />
     <Compile Include="Mvc\Service\CustomerService.cs" />
     <Compile Include="Mvc\Service\LoanService.cs" />
@@ -181,6 +224,18 @@
     </Compile>
     <Compile Include="Mvc\View\ActionView.Designer.cs">
       <DependentUpon>ActionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mvc\View\Blog2View.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mvc\View\Blog2View.Designer.cs">
+      <DependentUpon>Blog2View.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mvc\View\BlogView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mvc\View\BlogView.Designer.cs">
+      <DependentUpon>BlogView.cs</DependentUpon>
     </Compile>
     <Compile Include="Mvc\View\CountryView.cs">
       <SubType>Form</SubType>
@@ -200,6 +255,8 @@
     <Compile Include="Mvc\View\LoanView.Designer.cs">
       <DependentUpon>LoanView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mvc\View\ScreenMode.cs" />
+    <Compile Include="MyConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -207,6 +264,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Mvc\View\ActionView.resx">
       <DependentUpon>ActionView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\View\Blog2View.resx">
+      <DependentUpon>Blog2View.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mvc\View\BlogView.resx">
+      <DependentUpon>BlogView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mvc\View\CountryView.resx">
       <DependentUpon>CountryView.cs</DependentUpon>
@@ -242,6 +305,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
+    <Content Include="ReadMeAutomation.Designer.txt" />
+    <Content Include="ReadMeAutomation.txt">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="ReadMeGeneration.txt" />
     <Content Include="ReadMeLinq.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

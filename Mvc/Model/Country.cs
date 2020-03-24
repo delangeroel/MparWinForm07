@@ -9,10 +9,13 @@ namespace MparWinForm07.Mvc.Model
 {
     public class Country
     {
-        [Key]
-        public string countrycode { get; set; }
+        //[Key]
+        //public lond id { get; set; }
 
-        public string countryName { get; set; }
+        [Key]
+        public string Countrycode { get; set; }
+
+        public string CountryName { get; set; }
         
         [Timestamp]
         public byte[] Timestamp { get; set; }
@@ -20,8 +23,8 @@ namespace MparWinForm07.Mvc.Model
         public Country() { }
         public Country(string countrycode, string countryName)
         {
-            this.countrycode = countrycode;
-            this.countryName = countryName;
+            this.Countrycode = countrycode;
+            this.CountryName = countryName;
         }
 
     }

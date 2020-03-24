@@ -51,7 +51,6 @@ namespace MparWinForm07.Mvc.Controller
                 _view.AddUserToGrid(usr);
 
             _view.SetSelectedUserInGrid((User)_users[0]);
-
         }
 
         public void SelectedUserChanged(string selectedUserId)

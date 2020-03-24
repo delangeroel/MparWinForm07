@@ -15,6 +15,7 @@ namespace MparWinForm07.Mvc.Model
         public DbSet<Country> Country { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Loan> Loan { get; set; }
+        public DbSet<Blog> Blog { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

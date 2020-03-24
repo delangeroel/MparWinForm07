@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,7 +53,7 @@ namespace MparWinForm07.Mvc.Service
             }
         }
 
-        public IList getAllCountries()
+        public IList getAllLoans()
         {
             using (var context = new MyContext())
             {
@@ -72,7 +73,7 @@ namespace MparWinForm07.Mvc.Service
             }
         }
 
-        public Loan getActionCode(long id)
+        public Loan getLoanCode(long id)
         {
             using (var context = new MyContext())
             {
@@ -105,7 +106,7 @@ namespace MparWinForm07.Mvc.Service
 
         public void create500()
         {
-            for (int i = 1; i < 500; i++)
+            for (int i = 1; i < 5; i++)
             {
                 string tekst = "";
                 using (var context = new MyContext())
@@ -123,11 +124,14 @@ namespace MparWinForm07.Mvc.Service
                     {
                         tekst = "0" + i;
                     }
-
-
-                    loan.IntrestDay = DateTime.Now;
                     loan.CustomerNumber = i;
-                    loan.Amount = new decimal(100000 / i);
+                    loan.Amount = new decimal(100000 / i); 
+                    loan.IntrestDay = DateTime.Now;
+                    loan.User = Environment.UserName; 
+                    //loan.User = WindowsIdentity.GetCurrent().Name;
+                    loan.ChangeDate = DateTime.Now;
+
+                    loan.Status = Status.Active;
                     context.Add(loan);
                     context.SaveChanges();
                 }

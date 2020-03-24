@@ -56,8 +56,8 @@ namespace MparWinForm07.Mvc.Service
         {
             using (var context = new MyContext())
             {
-                return context.Country
-                    .OrderBy(b => b.countrycode)
+                return context.Customer
+                    .OrderBy(b => b.CustomerNumber)
                     .ToList();
             }
         }
@@ -72,7 +72,7 @@ namespace MparWinForm07.Mvc.Service
             }
         }
 
-        public Customer getActionCode(int customerNumber)
+        public Customer getCustomerNumber(int customerNumber)
         {
             using (var context = new MyContext())
             {

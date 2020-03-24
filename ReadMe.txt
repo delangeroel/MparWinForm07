@@ -9,6 +9,7 @@ Microsoft.EntityFrameworkCore.Tools
 
 Install-Package Microsoft.EntityFrameworkCore.Tools
 Add-Migration InitialCreate
+Add-Migration -Name tablename
 Update-Database
 // Numeric opmaak/formatting
 https://documentation.devexpress.com/WindowsForms/1498/Controls-and-Libraries/Editors-and-Simple-Controls/Common-Editor-Features-and-Concepts/Input-Mask/Mask-Type-Numeric

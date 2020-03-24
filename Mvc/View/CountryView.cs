@@ -14,10 +14,30 @@ namespace MparWinForm07.Mvc.View
 {
     public partial class CountryView : Form, ICountryView
     {
-        public string countrycode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string countryName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public byte[] Timestamp { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool CanModifyID { set => throw new NotImplementedException(); }
+        public string countrycode
+        {
+            get { return txtCountryCode.Text; }
+            set { this.txtCountryCode.Text = value; }
+        }
+        public string countryName
+        {
+            get { return txtDescription.Text; }
+            set { this.txtDescription.Text = value; }
+        }
+        byte[] OwnTimestamp;
+//        public byte[] Timestamp
+//        {
+//            get { return OwnTimestamp; }
+//            set { this.OwnTimestamp  = value; }
+//                long longVar = BitConverter.ToInt64(byteValue, 0);
+//                DateTime dateTimeVar = new DateTime(1980, 1, 1).AddMilliseconds(longVar);
+//                return txtTimestamp.Text; 
+//            }
+//        }
+        public bool CanModifyID
+        {
+            set { this.txtCountryCode.Enabled = value; }
+        }
 
         public CountryView()
         {
@@ -30,25 +50,28 @@ namespace MparWinForm07.Mvc.View
             XCurrentPage.Value = 0;
             XRecordsPerPage.Value = 10;
         }
-        ActionCodeController _controller;
+        CountryController _controller;
 
         // Paging
         private int TableRecords;
         private int MaxPage;
+        int _countriesListSelectedItem;
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-
+            listView1.SelectedItems.Clear();
+            _controller.AddNew();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-
+            _controller.Remove();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
 
+            _controller.Save();
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
@@ -112,37 +135,93 @@ namespace MparWinForm07.Mvc.View
         }
         public void SetController(CountryController controller)
         {
-            throw new NotImplementedException();
+            this._controller = controller;
         }
 
         public void ClearGrid()
         {
-            throw new NotImplementedException();
+            this.listView1.Columns.Clear();
+            this.listView1.Columns.Add("Country code", 80, HorizontalAlignment.Left);
+            this.listView1.Columns.Add("CountryName", 200, HorizontalAlignment.Left);
+            //this.listView1.Columns.Add("Timestamp", 200, HorizontalAlignment.Left);
+            // Add rows to grid
+            this.listView1.Items.Clear();
+            _countriesListSelectedItem = -1;
         }
 
         public void AddToGrid(Country country)
         {
-            throw new NotImplementedException();
+            ListViewItem parent;
+            parent = this.listView1.Items.Add("" + country.Countrycode);
+            parent.SubItems.Add("" + country.CountryName);
+            //parent.SubItems.Add("");
         }
 
         public void UpdateGrid(Country country)
         {
-            throw new NotImplementedException();
+            if (_countriesListSelectedItem  < 0) return;
+
+            ListViewItem rowToUpdate = listView1.Items[_countriesListSelectedItem];
+                rowToUpdate.Text = country.Countrycode;
+                rowToUpdate.SubItems[1].Text = country.CountryName;
+                //rowToUpdate.SubItems[2].Text = ""+country.Timestamp;
         }
 
-        public void RemoveFromGrid(Country country)
+        public void RemoveFromGrid(int index)
         {
-            throw new NotImplementedException();
+            if (_countriesListSelectedItem < 0) return;
+
+            this.listView1.Items.RemoveAt(index);
         }
+
 
         public string GetIdOfSelectedInGrid()
         {
-            throw new NotImplementedException();
+            if (this.listView1.SelectedItems.Count > 0)
+                return this.listView1.SelectedItems[0].Text;
+            else
+                return "";
         }
 
         public void SetSelectedInGrid(Country country)
         {
-            throw new NotImplementedException();
+            foreach (ListViewItem row in this.listView1.Items)
+            {
+                if (row.Text.CompareTo(country.Countrycode) == 0)
+                {
+                    row.Selected = true;
+                    long getLong = BitConverter.ToInt64(country.Timestamp, 0);
+
+                    DateTime getNow = DateTime.FromBinary(getLong);
+                    //_selectedObject = 
+                }
+            }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedItems.Count > 0) 
+                this._controller.SelectedChanged(this.listView1.SelectedItems[0].Text);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public int GetSelectedIndex()
+        {
+            if (listView1.SelectedItems.Count ==0) return -1;
+                return this.listView1.SelectedIndices[0];
         }
     }
 }

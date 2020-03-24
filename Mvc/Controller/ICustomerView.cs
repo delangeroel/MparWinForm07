@@ -14,16 +14,17 @@ namespace MparWinForm07.Mvc.Controller
         void AddToGrid(Customer customer);
         void UpdateGrid(Customer customer);
         void RemoveFromGrid(Customer customer);
-        string GetIdOfSelectedInGrid();
+        int GetIdOfSelectedInGrid();
         void SetSelectedInGrid(Customer customer);
+
 
         int CustomerNumber { get; set; }
         string Name { get; set; }
-        string address { get; set; }
-        string city { get; set; }
-        Country countryCode { get; set; }
+        string Address { get; set; }
+        string City { get; set; }
+        string CountryCode { get; set; }
 
-        byte[] Timestamp { get; set; }
+       DateTime Timestamp { get; set; }
         bool CanModifyID { set; }
     }
 }
