@@ -134,7 +134,7 @@ namespace MparWinForm07.Mvc.View
                 listView1.Items[index].Selected = true;
                 listView1.Select();
                 EnableInput(true);
-            }
+            } 
             else
             {
                 EnableInput(false);
